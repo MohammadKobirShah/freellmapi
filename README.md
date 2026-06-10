@@ -10,6 +10,7 @@ Aggregate the free tiers from Google, Groq, Cerebras, NVIDIA, Mistral, OpenRoute
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contributing)
 [![Docker image](https://img.shields.io/badge/ghcr.io-freellmapi-2496ED?logo=docker&logoColor=white)](https://github.com/tashfeenahmed/freellmapi/pkgs/container/freellmapi)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new?template=https://github.com/tashfeenahmed/freellmapi)
 
 ![Fallback chain with per-provider token budget](repo-assets/fallback-chain.png)
 
@@ -192,6 +193,23 @@ By default the container's port is bound to `127.0.0.1` (localhost only). To rea
 SQLite data is stored in the `freellmapi-data` volume at `/app/server/data`. Keep the same `.env` `ENCRYPTION_KEY` and volume when upgrading, because provider keys are encrypted at rest.
 
 More Docker operations and examples live in [docker/README.md](./docker/README.md).
+
+## Railway
+
+Deploy to Railway with one click:
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new?template=https://github.com/tashfeenahmed/freellmapi)
+
+After deployment, set these environment variables in the Railway dashboard:
+
+| Variable | Required | Description |
+|---|---|---|
+| `ENCRYPTION_KEY` | Yes | Generate with `openssl rand -hex 32` |
+| `PORT` | No | Defaults to `3001` (Railway sets `PORT` automatically) |
+
+Railway provisions a persistent volume at `/app/server/data` for the SQLite database. Your encryption key and data survive deploys and reboots.
+
+> **Note:** Railway's free tier includes 500 hours/month of run time. The app uses ~40 MB RAM at idle.
 
 ## Desktop app
 
